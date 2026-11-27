@@ -12,6 +12,8 @@ Hackmon introduced the three-term expression. Toker proved its coverage bound fo
 
 ## How the proof works
 
+Harrington, Klein, Lowrance and Trifonov studied the estimate for selected moduli under a prime-factor restriction. Majchrzak disproved their unrestricted conjecture for selected moduli. The theorem here uses every nontrivial divisor of the odd period; that hypothesis is essential to our polynomial argument. [Original paper, Problem 4](https://arxiv.org/abs/2605.18644) · [Majchrzak's counterexamples](https://doi.org/10.5281/zenodo.24408596)
+
 The sum of the reciprocals of the positive powers of any odd prime is at most one half. This places the contribution of every prime in the same interval, independently of how many primes there are. Two polynomial inequalities on that interval show that whenever the proposed bound is informative, the total weight of all classes is below five. This makes the fourth and subsequent terms of the alternating sum decrease in magnitude. A deletion identity passes positivity from complete divisor families to arbitrary subfamilies. A short proof of Shearer's avoidance inequality then gives the desired coverage bound. All steps appear in the manuscript.
 
 ## Research and verification record
@@ -21,5 +23,7 @@ The sum of the reciprocals of the positive powers of any odd prime is at most on
 - Lean verifies the [two polynomial inequalities](./ThirdOrderBounds.lean), the [weighted counting and alternating-tail estimate](./ThirdOrderTail.lean), [positivity under deletion](./ThirdOrderDeletion.lean), [the finite-event form of Shearer's argument](./ThirdOrderAvoidance.lean), and [the exact CRT independence counts](./ThirdOrderCRT.lean). The manuscript gives the full arithmetic proof.
 - The [integer-arithmetic calculator](./coverage_bound.py) evaluates the bound directly from the prime powers of the period. Its values agreed with direct coprime-pair and coprime-triple enumeration for all 1,000 odd periods below 2,000. To reproduce the example in the paper, run `python3 coverage_bound.py 15015`. It certifies at least 2,905 uncovered residues.
 - A related potential disproof of the all-orders claim was discarded after we located Toker's prior result. The earlier one-prime repair work on Erdős problem 7 has its own [research record](../README.md).
+
+The [arithmetic theorem in Lean](./ThirdOrderMain.lean) applies the coverage argument to actual residue classes of an odd period. Its remaining hypothesis, `Normalized.levels`, identifies the first three unordered divisor sums on each restricted set of prime coordinates with the corresponding polynomial expressions. Companion proofs establish the [prime-power allocation formula](./ThirdOrderAllocation.lean), [inclusion–exclusion over ordered slots](./ThirdOrderProducts.lean), and [factorial count of the orders of an unordered family](./ThirdOrderUnlabel.lean). The manuscript connects these identities on each restriction. To run the kernel checks, use `bash verify.sh /path/to/formal-conjectures` with the [pinned checkout and its Mathlib cache](https://github.com/google-deepmind/formal-conjectures/tree/9097e2f90e66d2f6244209cb1c07f7120d17ec53).
 
 This is a public research manuscript awaiting independent mathematical review.

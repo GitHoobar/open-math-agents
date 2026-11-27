@@ -1,5 +1,5 @@
 \documentclass[11pt]{article}
-\usepackage[letterpaper,left=.9in,right=.9in,top=.8in,bottom=.82in]{geometry}
+\usepackage[letterpaper,left=.86in,right=.86in,top=.73in,bottom=.74in]{geometry}
 \usepackage{amsmath,amssymb,amsthm,xcolor,hyperref}
 \hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,citecolor=blue!45!black,
 pdftitle={A third-order bound for unions of odd residue classes},pdfauthor={GitHoobar}}
@@ -53,6 +53,10 @@ The usual third-order Bonferroni upper bound includes all actual pair
 and triple intersections. Here only pairwise-coprime families enter,
 so the stated upper bound depends on \(L\) alone.
 Hackmon introduced the third-order expression \cite[Definition 2]{hackmon}.
+Harrington, Klein, Lowrance and Trifonov proved a related bound for selected
+divisors with restricted prime support \cite[Theorem 1.9]{hklt}.
+Majchrzak showed that unrestricted selected divisors can violate it
+\cite{maj}. Our sum ranges over the complete divisor family of an odd period.
 Toker distinguished it from the all-orders expression, established the
 third-order inequality through seven prime factors, and disproved the
 unrestricted all-orders bound \cite[\S\S 4--5]{toker}.
@@ -183,12 +187,14 @@ continuity of the products \(P(t)\) at zero. Thus the estimate can certify
 uncovered points beyond the raw sum of class sizes at arbitrarily large rank.
 
 \paragraph{Provenance.}
-This research note was developed with OpenAI Codex under the GitHub
-handle GitHoobar. The benchmark and its distinction from the all-orders
-variant are due to the sources cited below. The argument is presented
-for independent review.
+Developed with OpenAI Codex under the GitHub handle GitHoobar.
+Hackmon and Toker supplied the benchmark. We present the proof for
+independent review.
 
+\small
+\emergencystretch=1em
 \begin{thebibliography}{9}
+\setlength{\itemsep}{1pt}
 \bibitem{hackmon} I.~Hackmon, \emph{On odd covering systems with few prime
 factors}, preprint, April 2026. \href{https://rxiv.org/abs/2604.0035}{viXra:2604.0035}.
 \bibitem{toker} S.~A.~Toker, \emph{On the CRT Coverage Maximality Conjecture
@@ -197,5 +203,11 @@ and the Erd\H{o}s--Selfridge Problem Through Rank Seven}, research memorandum,
 \bibitem{shearer} J.~B.~Shearer, \emph{On a problem of Spencer},
 Combinatorica \textbf{5} (1985), 241--245.
 \href{https://doi.org/10.1007/BF02579368}{doi:10.1007/BF02579368}.
+\bibitem{hklt} J.~Harrington, J.~Klein, J.~Lowrance and O.~Trifonov,
+\emph{Covering systems where the prime divisors of all moduli are only 2, 3, or 5},
+2026. \href{https://arxiv.org/abs/2605.18644}{arXiv:2605.18644}.
+\bibitem{maj} F.~Majchrzak, \emph{Complete coverings for which a coprime-triple
+density bound tends to minus infinity}, 2026.
+\href{https://doi.org/10.5281/zenodo.24408596}{doi:10.5281/zenodo.24408596}.
 \end{thebibliography}
 \end{document}

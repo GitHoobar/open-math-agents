@@ -1,0 +1,137 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,left=.9in,right=.9in,top=.8in,bottom=.85in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,xcolor,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,citecolor=blue!45!black,
+pdftitle={Irredundant covering systems with arbitrarily negative coprime-triple estimates},pdfauthor={GitHoobar}}
+\newtheorem{theorem}{Theorem}
+\title{\vspace{-1.5em}Irredundant covering systems with arbitrarily\\ negative coprime-triple estimates}
+\author{GitHoobar}
+\date{27 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+Majchrzak constructed full coverings for which the coprime-triple expression of
+Harrington, Klein, Lowrance and Trifonov tends to minus infinity, and asked
+what happens when every class of the full covering is essential. We construct
+finite irredundant coverings of the integers by distinct moduli with the same
+divergence. For every class we give a private integer, so removing any one
+class destroys the covering.
+\end{abstract}
+
+For a finite set \(D\) of distinct integers greater than one, define
+\[
+ F(D)=\sum_{d\in D}\frac1d
+ -\sum_{\substack{\{d,e\}\subseteq D\\(d,e)=1}}\frac1{de}
+ +\sum_{\substack{\{d,e,f\}\subseteq D\\d,e,f\ {\rm pairwise\ coprime}}}\frac1{def}.
+\]
+The three sums use unordered sets of sizes one, two and three, respectively.
+Harrington, Klein, Lowrance and Trifonov proved an upper bound on covered
+density under a restriction on the prime factors and asked whether the
+restriction could be removed \cite[Theorem 1.9 and Problem 4]{hklt}.
+Majchrzak gave counterexamples that are full coverings, and separately
+irredundant counterexamples whose union has density less than one.
+He explicitly left open the case of irredundant full coverings
+\cite[p.~1]{maj}. A private integer of a residue class belongs to that class
+alone. A finite full covering is irredundant precisely when every class
+has a private integer.
+
+\begin{theorem}
+For every real number \(R\) there is a finite irredundant covering of
+\(\mathbb Z\) by one residue class for each \(d\in D\), with \(F(D)<R\).
+\end{theorem}
+
+\begin{proof}
+We adapt the binary classes and the two coprime blocks of
+\cite[p.~1]{maj}. We leave one residue modulo five open and attach a
+different repair class to each hole of the odd block. This gives the new
+classes private integers while preserving private integers for the old ones.
+Choose any nonempty finite set \(Q\) of primes strictly greater than five.
+Set \(N=3\prod_{q\in Q}q\). Begin with the classes
+\[
+ B_q:\quad x\equiv0\pmod{3q}\qquad(q\in Q).
+\]
+List the residues modulo \(N\) that they miss as \(u_1,\ldots,u_h\), with no
+repetitions. They miss every integer coprime to 3, so \(h\ge 2N/3\ge4\).
+Use the following additional classes:
+\[
+\begin{array}{lll}
+\text{class} &\text{modulus}&\text{conditions on }x\\ \hline
+P_i\ (1\le i\le h)&2^i&x\equiv 2^{i-1}-1\pmod {2^i}\\
+M_j\ (1\le j\le4)&5\cdot2^j&x\equiv-1\pmod{2^j},\quad x\equiv j-1\pmod5\\
+C_i\ (1\le i\le h)&5N\cdot2^i&x\equiv-1\pmod{2^i},\quad
+                  x\equiv4\pmod5,\quad x\equiv u_i\pmod N .
+\end{array}
+\]
+Each row specifies one class per listed modulus by the Chinese remainder
+theorem. The even moduli have odd parts \(1,5,5N\), respectively, and the
+powers of two distinguish them within each row. The odd moduli \(3q\) are
+also pairwise distinct.
+
+\emph{Coverage.} The classes \(P_i\) cover every residue other than
+\(-1\bmod 2^h\): if \(2^h\nmid x+1\), take the first \(i\le h\) with
+\(2^i\nmid x+1\). On the remaining residue all four binary conditions of
+the \(M_j\) hold. These classes cover four residues modulo five.
+The remaining points have \(x\equiv4\bmod5\). Their residue modulo \(N\)
+is either covered by some \(B_q\) or equals \(u_i\), in which case \(C_i\)
+covers them.
+
+\emph{Irredundancy.} In the following table a triple gives the residues of a
+private integer modulo \(2^h,5,N\), in that order. These three moduli are
+pairwise coprime, so each triple is realized by an integer.
+\[
+\begin{array}{c|ccc}
+\text{class}&x\bmod 2^h&x\bmod5&x\bmod N\\\hline
+P_i&2^{i-1}-1&4&u_h\\
+M_j&-1&j-1&u_h\\
+B_q&-1&4&3q\\
+C_i&-1&4&u_i
+\end{array}
+\]
+In the first row only \(P_i\) has the indicated first failure of divisibility
+of \(x+1\) by a power of two. Only \(C_h\) could match its \(N\)-coordinate;
+that class requires \(x\equiv-1\bmod 2^h\). In the second row the residue
+modulo five selects \(M_j\) alone among the mixed classes and excludes
+every \(C_i\). Both rows use a hole of the \(B_q\).
+In the third row \(3r\mid 3q\) for \(r\in Q\) holds only for \(r=q\);
+as \(3q\) is covered, its residue is absent from the list of holes.
+In the last row \(u_i\) selects exactly one repair class. This verifies
+all four kinds of private integer.
+
+\emph{Value of the expression.} Let \(A\) consist of all the pure classes
+\(P_i\) and mixed classes \(M_j\), and let \(a,b,c\) be the sums of the reciprocal
+moduli in \(A\), in the \(B_q\), and in the \(C_i\), respectively. The
+coprime pairs are exactly the pairs from \(A\) and \(B\). Indeed, all
+members of \(A\cup C\) are even, all members of \(B\cup C\) are divisible
+by three, and every modulus in \(A\) has prime factors only in \(\{2,5\}\).
+There are no pairwise-coprime triples. Consequently
+\[
+ F(D)=a+b+c-ab=1-(a-1)(b-1)+c,
+\]
+where
+\[
+ a=1-2^{-h}+\frac{3}{16}\ge\frac98,\qquad
+ b=\frac13\sum_{q\in Q}\frac1q,\qquad
+ c=\frac{1-2^{-h}}{5N}<\frac15 .
+\]
+By divergence of the sum of prime reciprocals, \(b\) can be made
+arbitrarily large even after omitting the primes \(2,3,5\). For \(b\ge1\)
+we therefore have \(F(D)<6/5-(b-1)/8\), which tends to minus infinity.
+\end{proof}
+
+\smallskip
+\noindent\textit{Provenance and verification.} Developed with OpenAI Codex under
+the GitHub handle GitHoobar. A
+\href{https://github.com/GitHoobar/open-math-agents/blob/research/erdos-7/research/erdos-7/irredundant/IrredundantMain.lean}{Lean formalization}
+verifies the theorem for every real threshold. The question about removing
+redundant classes is due to Majchrzak. The coverings above contain even
+moduli. The Erd\H{o}s--Selfridge odd covering problem remains open.
+
+\begin{thebibliography}{9}
+\bibitem{hklt} J.~Harrington, J.~Klein, J.~Lowrance and O.~Trifonov,
+\emph{Covering systems where the prime divisors of all moduli are only 2, 3, or 5},
+May 2026. \href{https://arxiv.org/abs/2605.18644}{arXiv:2605.18644}.
+\bibitem{maj} F.~Majchrzak, \emph{Complete coverings for which a coprime-triple
+density bound tends to minus infinity}, revision 2, November 2026.
+\href{https://doi.org/10.5281/zenodo.24408596}{doi:10.5281/zenodo.24408596}.
+\end{thebibliography}
+\end{document}

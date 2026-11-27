@@ -12,7 +12,8 @@ trap 'rm -rf -- "$objects"' EXIT
 cd "$checkout"
 lake env bash -eu -c '
   export LEAN_PATH="$2${LEAN_PATH:+:$LEAN_PATH}"
-  for module in ThirdOrderBounds ThirdOrderTail ThirdOrderDeletion ThirdOrderAvoidance ThirdOrderCRT; do
+  for module in ThirdOrderBounds ThirdOrderTail ThirdOrderDeletion ThirdOrderAvoidance ThirdOrderCRT \
+                ThirdOrderAllocation ThirdOrderProducts ThirdOrderUnlabel ThirdOrderMain; do
     lean --root="$1" -o "$2/$module.olean" "$1/$module.lean"
   done
   lean --root="$1" "$1/Audit.lean"
