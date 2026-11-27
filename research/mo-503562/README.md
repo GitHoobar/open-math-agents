@@ -40,10 +40,11 @@ Indeed, the union $U$ of all the family members in that interval belongs to the 
 
 ## Lean verification
 
-[UnionDeterminant.lean](./UnionDeterminant.lean) proves the frequency factorization, constant term one, and nondivisibility for arbitrary injectively indexed families over a finite ground set. The product formula and probability interpretation have the written proofs above. The exact-frequency theorem uses only the standard Lean axioms `propext`, `Classical.choice` and `Quot.sound`.
+[UnionDeterminant.lean](./UnionDeterminant.lean) proves the frequency factorization, constant term one, and nondivisibility for arbitrary injectively indexed families over a finite ground set. [UnionMobius.lean](./UnionMobius.lean) verifies the product formula for union-closed families using Mathlib’s integer Möbius function. Both proofs use only the standard Lean axioms `propext`, `Classical.choice` and `Quot.sound`. The probability interpretation has the written proof above.
 
 With the Mathlib cache installed, run the following from the [pinned formal-conjectures checkout](https://github.com/google-deepmind/formal-conjectures/tree/9097e2f90e66d2f6244209cb1c07f7120d17ec53), passing the path to the downloaded Lean file.
 
 ```sh
 lake env lean /path/to/UnionDeterminant.lean
+lake env lean /path/to/UnionMobius.lean
 ```
