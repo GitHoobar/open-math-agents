@@ -1,0 +1,201 @@
+\documentclass[11pt]{article}
+\usepackage[letterpaper,left=.9in,right=.9in,top=.8in,bottom=.82in]{geometry}
+\usepackage{amsmath,amssymb,amsthm,xcolor,hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue!45!black,urlcolor=blue!45!black,citecolor=blue!45!black,
+pdftitle={A third-order bound for unions of odd residue classes},pdfauthor={GitHoobar}}
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newcommand{\D}{\mathcal D}
+\title{\vspace{-1.3em}A third-order bound for unions of odd residue classes}
+\author{GitHoobar}
+\date{27 November 2026}
+\begin{document}
+\maketitle
+\begin{abstract}
+For every nontrivial divisor of an odd integer \(L\), choose one residue
+class. The size of their union is at most the sum of their sizes, less the
+pairwise-coprime intersection terms, plus the pairwise-coprime triple
+intersection terms. The bound holds for every number of prime factors
+and every choice of their exponents. This answers the unrestricted
+third-order question distinguished by Toker from the all-orders
+CRT coverage benchmark. The key step is to show that whenever the
+third-order bound is below \(L\), all induced independence polynomials
+are positive and their full alternating sums dominate their cubic truncations
+on complete divisor families.
+\end{abstract}
+
+\section{The coverage bound}
+Let \(L\) be an odd positive integer and let \(\D=\{d>1:d\mid L\}\).
+Choose a residue \(a_d\bmod d\) for each \(d\in\D\). Write \(U\) for the
+number of residues modulo \(L\) lying in their union. For \(j\geq 1\) put
+\[
+ A_j=\sum_{\substack{J\subseteq\D,\ |J|=j\\
+               \gcd(d,e)=1\ \text{for distinct }d,e\in J}}
+               \ \prod_{d\in J}\frac1d,\qquad A_0=1 .
+\]
+All families in this definition are unordered. By the Chinese remainder
+theorem (CRT), each summand is the fraction of the period lying in the
+specified intersection, for every choice of residues.
+
+\begin{theorem}\label{thm:main}
+For every \(L\) and every assignment as above,
+\[
+ \frac{U}{L}\le b,\qquad b=A_1-A_2+A_3 .
+\]
+If \(b<1\), then also
+\[
+ 1-\frac UL\ \geq\ \sum_{j\ge0}(-1)^j A_j\ \geq\ 1-b>0.
+\]
+\end{theorem}
+
+Thus at least \(L(1-b)\) points are uncovered whenever \(b<1\).
+The usual third-order Bonferroni upper bound includes all actual pair
+and triple intersections. Here only pairwise-coprime families enter,
+so the stated upper bound depends on \(L\) alone.
+Hackmon introduced the third-order expression \cite[Definition 2]{hackmon}.
+Toker distinguished it from the all-orders expression, established the
+third-order inequality through seven prime factors, and disproved the
+unrestricted all-orders bound \cite[\S\S 4--5]{toker}.
+Theorem~\ref{thm:main} settles the third-order question at unrestricted rank.
+It gives a criterion for individual periods. The existence of a finite
+cover with distinct odd moduli remains open.
+
+\section{Two inequalities on a cube}
+Factor \(L=\prod_{i=1}^k p_i^{a_i}\), and define
+\[
+ x_i=\sum_{e=1}^{a_i}p_i^{-e},\qquad P(t)=\prod_{i=1}^k(1+t x_i),
+ \qquad W=A_1=P(1)-1 .
+\]
+Oddness gives \(0\leq x_i\leq 1/(p_i-1)\leq 1/2\).
+In an ordered list of pairwise-coprime divisors, a prime coordinate
+can go to at most one slot. For \(t\) slots, each allowed exponent for
+that prime contributes weight \(p_i^{-e}\), so the product \(P(t)\)
+counts all weighted placements with empty slots allowed.
+Excluding empty slots and then dividing by \(j!\) gives
+\[
+ j! A_j=\sum_{t=0}^{j}(-1)^{j-t}\binom jt P(t).
+\]
+In particular \cite[eq.~(5.2)]{toker},
+\begin{equation}\label{eq:b}
+ 6b=P(3)-6P(2)+15P(1)-10 .
+\end{equation}
+
+\begin{lemma}\label{lem:cube}
+On every cube \([0,1/2]^k\), the function \(b\) is nondecreasing in each
+coordinate and \(W\leq 5b\).
+\end{lemma}
+\begin{proof}
+A function affine separately in each argument is a convex combination
+of its values at the vertices of the cube, by successive linear
+interpolation. The slope of \(6b\) in a given coordinate, writing \(P_*\)
+for the product over the remaining coordinates, is
+\(3P_*(3)-12P_*(2)+15P_*(1)\).
+At a vertex with \(m\) coordinates equal to \(1/2\), its sign is that of
+\[
+ a_m=3\cdot 5^m-12\cdot4^m+15\cdot3^m.
+\]
+For \(m\ge7\) use \((5/4)^7>4\). The smaller cases appear below.
+Likewise \(6(5b-W)=5P(3)-30P(2)+69P(1)-44\) is separately affine.
+Its vertex values have the signs of
+\[
+ c_m=5\cdot5^m-30\cdot4^m+69\cdot3^m-44\cdot2^m .
+\]
+For \(m\ge9\) use \((5/4)^9>6\) and \(69\cdot3^m>44\cdot2^m\).
+The remaining integer checks are
+\[
+\begin{array}{c|rrrrrrrrr}
+m   &0&1&2&3&4&5&6&7&8\\\hline
+a_m &6&12&18&12&18&732&8658&\cdot&\cdot\\
+c_m &0&24&90&216&330&264&2730&44376&428490 .
+\end{array}
+\]
+These two vertex inequalities prove both assertions.
+\end{proof}
+
+\section{From the cubic truncation to a probability bound}
+For \(S\subseteq\D\), let \(A_j(S)\) count the same weighted families
+using only divisors in \(S\), and put \(Q(S)=\sum_{j\ge0}(-1)^j A_j(S)\).
+The sum is finite. Connect two divisors by an edge when they share a
+prime. Write \(N[v]\) for \(v\) and all its neighbors in this graph.
+
+\begin{lemma}\label{lem:pos}
+If \(b<1\), then \(Q(\D)\geq1-b\) and \(Q(S)>0\) for every \(S\subseteq\D\).
+\end{lemma}
+\begin{proof}
+For a set \(I\) of prime coordinates, let \(\D_I\) contain all
+nontrivial divisors supported in \(I\), with the original exponent
+bounds. Its cubic bound \(b_I\) is obtained by zeroing the coordinates
+outside \(I\). Lemma~\ref{lem:cube} gives \(b_I\leq b<1\) and
+\(W_I=A_1(\D_I)\leq5b_I<5\).
+Writing \(A_j^I=A_j(\D_I)\), count an admissible family of size \(j+1\)
+together with a marked member. The member that is added to a family of
+size \(j\) has total available weight at most \(W_I\), so
+\[
+ (j+1)A_{j+1}^I\leq W_I A_j^I .
+\]
+Thus \(A_{j+1}^I\leq A_j^I\) for \(j\ge4\). Pairing the tail
+\((A_4^I-A_5^I)+(A_6^I-A_7^I)+\cdots\) gives
+\(Q(\D_I)\geq 1-b_I>0\). This includes \(I\) equal to all coordinates.
+
+To pass to arbitrary \(S\subseteq\D_I\), induct on \(|I|\). The empty
+coordinate set gives \(Q(\varnothing)=1\). Start at \(\D_I\) and delete
+unwanted vertices one at a time. Splitting independent sets according to
+whether they contain \(v\in T\) gives
+\begin{equation}\label{eq:delete}
+ Q(T\setminus\{v\})=Q(T)+\frac1v Q(T\setminus N[v]).
+\end{equation}
+Every element of \(T\setminus N[v]\) avoids every prime of \(v>1\).
+The induction hypothesis therefore gives \(Q(T\setminus N[v])>0\),
+regardless of earlier deletions. Each deletion preserves positivity.
+\end{proof}
+
+\begin{proof}[Proof of Theorem~\ref{thm:main}]
+The conclusion for \(b\ge1\) follows from \(U\le L\). Suppose \(b<1\).
+For \(T\subseteq\D\), let \(Z(T)\) be the probability that a uniform point
+modulo \(L\) avoids the classes in \(T\). We include the short ratio
+argument for Shearer's inequality \cite{shearer}. The class at \(v\)
+is independent of the joint avoidance event for \(R=T\setminus N[v]\)
+by CRT. With \(T'=T\setminus\{v\}\), this gives
+\[
+ Z(T)\ \geq\ Z(T')-\frac1v Z(R).
+\]
+We prove inductively on \(|T|\) that \(Z(T)>0\) and
+\(Z(T)/Z(T')\geq Q(T)/Q(T')\) for each \(v\in T\).
+Both functions equal \(1\) at \(\varnothing\). The inductive ratio bounds
+telescope along a chain from \(R\) to \(T'\), giving
+\(Z(T')/Z(R)\geq Q(T')/Q(R)\), including equality on an empty chain.
+All denominators are positive by induction and Lemma~\ref{lem:pos}.
+Consequently
+\[
+ \frac{Z(T)}{Z(T')}\geq 1-\frac1v\,\frac{Q(R)}{Q(T')}
+   =\frac{Q(T)}{Q(T')}>0 ,
+\]
+by \eqref{eq:delete}. This proves the induction. Telescoping again gives
+\(1-U/L=Z(\D)\geq Q(\D)\geq1-b\), as required.
+\end{proof}
+
+\paragraph{A range where the bound gives information.}
+For \(L=3\cdot5\cdot7\cdot11\cdot13=15015\), the single-class sum is
+\(LW=17241>L\), while \(Lb=12110<L\).
+For any prescribed number of additional prime factors, adjoining
+sufficiently large distinct primes preserves both strict inequalities by
+continuity of the products \(P(t)\) at zero. Thus the estimate can certify
+uncovered points beyond the raw sum of class sizes at arbitrarily large rank.
+
+\paragraph{Provenance.}
+This research note was developed with OpenAI Codex under the GitHub
+handle GitHoobar. The benchmark and its distinction from the all-orders
+variant are due to the sources cited below. The argument is presented
+for independent review.
+
+\begin{thebibliography}{9}
+\bibitem{hackmon} I.~Hackmon, \emph{On odd covering systems with few prime
+factors}, preprint, April 2026. \href{https://rxiv.org/abs/2604.0035}{viXra:2604.0035}.
+\bibitem{toker} S.~A.~Toker, \emph{On the CRT Coverage Maximality Conjecture
+and the Erd\H{o}s--Selfridge Problem Through Rank Seven}, research memorandum,
+3 November 2026. \href{https://doi.org/10.5281/zenodo.23927150}{doi:10.5281/zenodo.23927150}.
+\bibitem{shearer} J.~B.~Shearer, \emph{On a problem of Spencer},
+Combinatorica \textbf{5} (1985), 241--245.
+\href{https://doi.org/10.1007/BF02579368}{doi:10.1007/BF02579368}.
+\end{thebibliography}
+\end{document}

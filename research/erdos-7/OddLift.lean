@@ -98,9 +98,10 @@ private def target {p h : ℕ} (u : Fin h → ℕ) (j : Fin h) : Label p h → �
 /-- Cover the full preimage of any h residues modulo M by distinct odd
 multiples of p, provided the proper-divisor budget buys (p−2)h+1 mixed
 classes at each level. The construction uses h levels. -/
-theorem repair (M p h : ℕ) (u : Fin h → ℕ) (prime : p.Prime) (hp : 3 ≤ p)
+theorem repair_with_support (M p h : ℕ) (u : Fin h → ℕ) (prime : p.Prime) (hp : 3 ≤ p)
     (oddM : Odd M) (cop : p.Coprime M) (budget : (p-2)*h < (M.divisors.erase 1).card) :
-    ∃ S : Finset ℕ, ∃ a : ℕ → ℤ, (∀ d ∈ S, 1 < d ∧ Odd d ∧ p ∣ d) ∧
+    ∃ S : Finset ℕ, ∃ a : ℕ → ℤ, (∀ d ∈ S, 1 < d ∧ Odd d ∧ p ∣ d ∧
+      ∃ j < h, ∃ e ∈ M.divisors, d = p^(j+1)*e) ∧
       ∀ z : ℤ, (∃ i, (M : ℤ) ∣ z - (u i : ℤ)) → ∃ d ∈ S, (d : ℤ) ∣ z - a d := by
   classical
   have capacity : Fintype.card (Slot p h) ≤ Fintype.card ↥(M.divisors.erase 1) := by
@@ -131,7 +132,8 @@ theorem repair (M p h : ℕ) (u : Fin h → ℕ) (prime : p.Prime) (hp : 3 ≤ p
       dvd_mul_of_dvd_left (dvd_pow_self p (Nat.succ_ne_zero _)) _
     have bound := Nat.le_of_dvd (Nat.mul_pos (pow_pos prime.pos _) (multpos l)) pd
     exact ⟨by omega, (prime.odd_of_ne_two (by omega)).pow.mul
-      (oddM.of_dvd_nat (multiplier_dvd E l)), pd⟩
+      (oddM.of_dvd_nat (multiplier_dvd E l)), pd, j.val, j.isLt, multiplier E l,
+        Nat.mem_divisors.mpr ⟨multiplier_dvd E l, mpos.ne'⟩, rfl⟩
   · intro z hz
     obtain ⟨i, hi⟩ := hz
     have hit (j : Fin h) (l : Label p h)
@@ -157,5 +159,23 @@ theorem repair (M p h : ℕ) (u : Fin h → ℕ) (prime : p.Prime) (hp : 3 ≤ p
         apply hit t (some (some (k,i)))
         · simpa only [digit, hk, t] using first
         · exact base _
+
+/-- The integer residue classes are usable as an odd covering-system repair. -/
+theorem repair (M p h : ℕ) (u : Fin h → ℕ) (prime : p.Prime) (hp : 3 ≤ p)
+    (oddM : Odd M) (cop : p.Coprime M) (budget : (p-2)*h < (M.divisors.erase 1).card) :
+    ∃ S : Finset ℕ, ∃ a : ℕ → ℤ, (∀ d ∈ S, 1 < d ∧ Odd d ∧ p ∣ d) ∧
+      ∀ z : ℤ, (∃ i, (M : ℤ) ∣ z - (u i : ℤ)) → ∃ d ∈ S, (d : ℤ) ∣ z - a d := by
+  obtain ⟨S, a, hs, hc⟩ := repair_with_support M p h u prime hp oddM cop budget
+  exact ⟨S, a, fun d hd => ⟨(hs d hd).1, (hs d hd).2.1, (hs d hd).2.2.1⟩, hc⟩
+
+/-- Every modulus in the repair has a bounded positive p-adic exponent and
+a remaining factor drawn from the divisors of the original period. -/
+theorem repair_supported (M p h : ℕ) (u : Fin h → ℕ) (prime : p.Prime) (hp : 3 ≤ p)
+    (oddM : Odd M) (cop : p.Coprime M) (budget : (p-2)*h < (M.divisors.erase 1).card) :
+    ∃ S : Finset ℕ, ∃ a : ℕ → ℤ,
+      (∀ d ∈ S, ∃ j < h, ∃ e ∈ M.divisors, d = p^(j+1)*e) ∧
+      ∀ z : ℤ, (∃ i, (M : ℤ) ∣ z - (u i : ℤ)) → ∃ d ∈ S, (d : ℤ) ∣ z - a d := by
+  obtain ⟨S, a, hs, hc⟩ := repair_with_support M p h u prime hp oddM cop budget
+  exact ⟨S, a, fun d hd => (hs d hd).2.2.2, hc⟩
 
 end OddLift
